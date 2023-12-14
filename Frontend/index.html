@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Tracker</title>
+  <!-- Add any necessary stylesheets or scripts here -->
+  <style>
+    /* Basic styling (this can be expanded for a better UI) */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    /* Define styles for specific sections like expense, income, budget, etc. */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Finance Tracker</h1>
+  </header>
+  <main>
+    <!-- Expense Tracking Section -->
+    <section id="expenses">
+      <h2>Expense Tracking</h2>
+      <!-- Form to add expenses -->
+      <form id="expense-form">
+        <label for="expense-description">Description:</label>
+        <input type="text" id="expense-description" name="expense-description"><br>
+        <label for="expense-amount">Amount:</label>
+        <input type="number" id="expense-amount" name="expense-amount"><br>
+        <button type="submit">Add Expense</button>
+      </form>
+      <!-- Display list of expenses -->
+      <div id="expense-list">
+        <!-- Expenses will appear here -->
+      </div>
+    </section>
+
+    <!-- Income Tracking Section -->
+    <section id="income">
+      <h2>Income Tracking</h2>
+      <!-- Form to add income -->
+      <form id="income-form">
+        <label for="income-description">Description:</label>
+        <input type="text" id="income-description" name="income-description"><br>
+        <label for="income-amount">Amount:</label>
+        <input type="number" id="income-amount" name="income-amount"><br>
+        <button type="submit">Add Income</button>
+      </form>
+      <!-- Display list of income -->
+      <div id="income-list">
+        <!-- Income will appear here -->
+      </div>
+    </section>
+
+    <!-- Budget Visualization Section -->
+    <section id="budget">
+      <h2>Budget Visualization</h2>
+      <canvas id="budget-chart" width="400" height="200">
+        <!-- Budget chart will appear here -->
+      </canvas>
+    </section>
+  </main>
+  <!-- Any necessary scripts can be included here -->
+  <script>
+   // Sample data placeholders (replace with actual functionality to handle data)
+let expenses = [];
+let income = [];
+
+// Function to add expense
+function addExpense(description, amount) {
+  expenses.push({ description, amount });
+  updateExpenseList();
+}
+
+// Function to update expense list in the UI
+function updateExpenseList() {
+  const expenseList = document.getElementById('expense-list');
+  expenseList.innerHTML = '';
+  expenses.forEach(expense => {
+    const expenseItem = document.createElement('div');
+    expenseItem.textContent = `${expense.description}: $${expense.amount}`;
+    expenseList.appendChild(expenseItem);
+  });
+}
+
+// Function to add income
+function addIncome(description, amount) {
+  income.push({ description, amount });
+  updateIncomeList();
+}
+
+// Function to update income list in the UI
+function updateIncomeList() {
+  const incomeList = document.getElementById('income-list');
+  incomeList.innerHTML = '';
+  income.forEach(incomeItem => {
+    const incomeElement = document.createElement('div');
+    incomeElement.textContent = `${incomeItem.description}: $${incomeItem.amount}`;
+    incomeList.appendChild(incomeElement);
+  });
+}
+
+// Event listener for expense form submission
+document.getElementById('expense-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const description = document.getElementById('expense-description').value;
+  const amount = parseFloat(document.getElementById('expense-amount').value);
+  addExpense(description, amount);
+  document.getElementById('expense-description').value = '';
+  document.getElementById('expense-amount').value = '';
+});
+
+// Event listener for income form submission
+document.getElementById('income-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const description = document.getElementById('income-description').value;
+  const amount = parseFloat(document.getElementById('income-amount').value);
+  addIncome(description, amount);
+  document.getElementById('income-description').value = '';
+  document.getElementById('income-amount').value = '';
+});
+
+  </script>
+</body>
+</html>
